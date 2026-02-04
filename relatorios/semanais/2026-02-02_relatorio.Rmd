@@ -16,79 +16,80 @@ Objetivo principal:
 - Tratamento e limpeza de dados
 
 Objetivos secundários (se houver):
-- excluir todos, ou máximo possível, de dados faltantes (NA's)
+- Identificar, avaliar e tratar dados faltantes (NA's) por meio de estratégias metodológicas adequadas
 - 
 
 ---
 ## 3. Atividades realizadas
 
-Descrever de forma objetiva e técnica as atividades desenvolvidas na semana.
+Descrição objetiva e técnica das atividades desenvolvidas na semana.
 
 - Leituras realizadas:
-  - [Nenhuma]
+  - Documentação do pacote dplyr e tidyverse para manipulação de dados
 - Implementações / códigos:
-  - banch Main
+  - Desenvolvimento de script para tratamento da variável height
+  - Verificação de inconsistências e padronização dos valores
 - Análises exploratórias / testes:
-  - [Nenhuma]
+  - Identificação de valores faltantes (NA's)
+  - Identificação e tratamento de valores faltantes na variável height
+  - Identificação de valores faltantes na variável mass
 - Discussões / reflexões teóricas:
-  - [Nenhuma]
+  - Avaliação de possíveis estratégias para tratamento de dados faltantes
+  - Identificação e catalogação das observações com valores faltantes na variável mass
+  - Planejamento da imputação baseada em mediana estratificada por espécie e gênero para a variável mass
 
 ---
 ## 4. Resultados parciais / produtos gerados
 
-Listar tudo que foi produzido, mesmo que incompleto.
+Listagem de tudo que foi produzido, mesmo que incompleto.
 
 - Scripts:
-  - Tratamento e limpeza dos dados da variável height
-- Funções:
-  - 
-- Tabelas / gráficos:
-  - [Nenhum(a)]
-- Resumos teóricos:
-  - [Nenhum]
+  - Script em R para limpeza e tratamento da variável height
+  - Identificação de valores NA's da variável mass
+- Produtos gerados:
+  - Preparação da base para etapas subsequentes de análise exploratória
+  - Estrutura inicial da fase de limpeza de dados
 
 ---
 ## 5. Problemas e dificuldades encontradas
 
-Descrever claramente os obstáculos enfrentados.
+Descrição dos obstáculos enfrentados.
 
-- Teóricos:  
-  - [Nenhum]
-- Computacionais:  
-  - [Nenhum]
 - Dados:  
-  - O dado da altura de um personagem não foi identificado, continuando um valor faltantes (NA's)
+  - O dado da altura de 06 personagens não foi identificado, sendo imputado manualmente a partir de uma fonte externa. No entanto, para um perosnagem, continua um valor faltante (NA) nessa variável, por não haver informações confiáveis disponíveis
+  - A variável mass apresentou 28 observações com valores faltantes, número significativamente superior ao encontrado na variável height (6 observações). Essa quantidade dificulta a imputação manual individual dos dados, exigindo abordagem metodológica alternativa
 - Metodológicos:  
-  - [Nenhum]
+  - Avaliação da confiabilidade de fontes secundárias para imputação manual de dados
 
 ---
 ## 6. Decisões tomadas e justificativas
 
-Registrar escolhas feitas ao longo da semana.
+Registro das escolhas feitas ao longo da semana.
 
-- Pesquisar e imputar manualmente os dados encontrados na enciclopédia de Star Wars as alturas dos personagens com dado faltante (NA's na variável height)
-- 
-
+- Pesquisar e imputar manualmente os dados encontrados na enciclopédia de Star Wars as alturas dos personagens com dado faltante (NA's na variável height), com registro da fonte para garantir rastreabilidade dos dados inseridos.
+- Para os dados faltantes da variável mass, optou-se pela imputação por medidas de tendência central, especificamente a mediana, estratificada por espécie e gênero quando disponível. A escolha foi motivada pelo elevado número de valores ausentes, que inviabiliza a busca manual individual. Embora modelos de regressão pudessem ser empregados para predição dos valores, essa abordagem não foi adotada devido a limitações técnicas e ao escopo atual do projeto. A utilização da mediana possui embasamento estatístico, sendo uma medida robusta frente a valores extremos e adequada para dados potencialmente assimétricos
 ---
 ## 7. Próximos passos (planejamento da próxima semana)
 
-Definir tarefas objetivas e alcançáveis.
+Desenho de tarefas.
 
-- 
-- 
-- 
+- Expandir o tratamento de dados faltantes para outras variáveis
+- Iniciar análise exploratória descritiva da base
+- Construir visualizações estatísticas iniciais
+- Avaliar consistência e padronização das variáveis categóricas
 
 ---
 ## 8. Referências utilizadas na semana
 
 - WICKHAM, H. et al. Welcome to the tidyverse. Journal of Open Source Software, [S. l.], v. 4, n. 43, p. 1686, 2019. DOI: 10.21105/joss.01686. Disponível em: https://joss.theoj.org/papers/10.21105/joss.01686. Acesso em: 3 fev. 2026.
-- STARWARS (dplyr). Starwars characters. In: dplyr: A grammar of data manipulation. [S. l.], 2023. Disponível em: https://github.com/tidyverse/dplyr. Acesso em: 02 fev. 2026.
+- STARWARS (dplyr). Starwars characters. In: dplyr: A grammar of data manipulation. [S. l.], 2023. Disponível em: https://github.com/tidyverse/dplyr. Acesso em: 2 fev. 2026.
 - STAR WARS Fandom. In: Fandom. [S. l.], 2024. Disponível em: https://starwars.fandom.com/wiki/Main_Page. Acesso em: 3 fev. 2026.
+- WARING, E. et al. skimr: Compact and Flexible Summaries of Data [programa de computador]. Versão 2.2.2. 2026. Disponível em: https://docs.ropensci.org/skimr/. Acesso em: 3 fev. 2026.
 
 ---
 ## 9. Observações gerais
 
 Espaço livre para comentários, ideias futuras ou pontos para discutir com o(a) orientador(a).
 
-- [Nenhuma]
+- Observou-se que o tratamento de dados faltantes representa etapa fundamental para garantir qualidade e confiabilidade das análises subsequentes. A atividade reforçou a importância da escolha criteriosa de métodos de imputação.
 
