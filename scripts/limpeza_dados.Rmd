@@ -1,5 +1,7 @@
 ---
-output: github_document
+output: 
+  html_notebook: 
+    toc: true
 editor_options: 
   chunk_output_type: inline
 ---
@@ -7,20 +9,27 @@ editor_options:
 #carregando o pacote/coleção de pacote tidyverse
 #install.packages("tidyverse")
 library(tidyverse)
+#install.packages("skimr")
+library(skimr)
 ```
-
-A seguir, será feito o carregamento dos dados e a análise inicial do comportamento dos dados na base de dados Star Wars:
+A seguir, será feito o carregamento dos dados e a análise inicial do comportamento dos deles na base de dados Star Wars:
 ```{r}
 #carregando a base de dados Star Wars
-starwars
+head(starwars)
+tail(starwars)
 
 dados <- starwars
+```
 
-summary(dados)
-dados
-
-
+Com uma visão global, será visualizado se há dados faltantes (NA's) e em quais variáveis
+```{r}
 #verificando se há valores NA's
+skim(dados)
+```
+
+
+```{r}
+#verificando em quais variáveis há valores NA's
 cat("As variáveis que possuem dados faltantes são:\n")
 for(i in names(dados)){
   if(any(is.na(dados[[i]]))){
@@ -28,10 +37,13 @@ for(i in names(dados)){
   }
 }
 ```
+
 Verifica-se logo que as variáveis acima possuem valores faltantes (Na's). Dessa forma, é necessário tratá-las:
 ```{r}
 #height
-dados$height
+head(dados$height)
+tail(dados$height)
+
 count(dados[is.na(dados$height),]) #há 6 observações sem a altura (height)
 dados[is.na(dados$height),]
 dados %>%
@@ -39,12 +51,14 @@ dados %>%
   select(name)
 ```
 Após uma conferência no Wookieepedia, enciclopédia criada sobre Star Wars, nota-se que os personagens adiante possuem as respectivas alturas:
+
 Arvel Crynyd: não encontrado (desconhecido/unknown)
 Finn: 178
 Rey: 170
 Poe Dameron: 172
 BB8: 67
 Captain Phasma: 200
+
 Dessa forma, será imputado tais valores para conhecidos para eliminar os NA's:
 ```{r}
 dados[c(28, 83, 84, 85, 86, 87), c("name","height")]
@@ -52,10 +66,12 @@ dados[c(28, 83, 84, 85, 86, 87), "height"] <- c(NA, 178, 170, 172, 67, 200)
 dados[c(28, 83, 84, 85, 86, 87), c("name","height")]
 ```
 
-
 ```{r}
-dados$mass
-count(dados[is.na(dados$mass),]) #há 6 observações sem a altura (height)
+#mass
+head(dados$mass)
+tail(dados$mass)
+
+count(dados[is.na(dados$mass),])
 dados[is.na(dados$mass),]
 rownames(dados)[is.na(dados$mass)]
 dados %>%
@@ -63,6 +79,7 @@ dados %>%
   select(name)
 ```
 Dessa forma, os seguintes personagens estão sem valores na variável mass:
+
 Wilhuff Tarkin				
 Mon Mothma				
 Arvel Crynyd				
@@ -73,7 +90,9 @@ Watto
 Quarsh Panaka				
 Shmi Skywalker				
 Bib Fortuna
+
 ...
+
 Jocasta Nu				
 R4-P17				
 San Hill				
@@ -82,6 +101,7 @@ Rey
 Poe Dameron				
 BB8				
 Captain Phasma
+
 Totalizando 28 personagens sem os dados referentes à variável mass.
 
 Diferentemente da variável height, que possuia 6 dados faltantes, na variável em questão, há 28 observações, o que dificulta a procura de cada personagem e imputação manual. A partir disso, pensei imputar pelo método das tendências centrais, utilizando a mediana, mas diferenciandos por espécies e gênero, quando há.
