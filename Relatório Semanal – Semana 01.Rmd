@@ -1,0 +1,94 @@
+# Relatório Semanal – Semana 01
+
+---
+## 1. Identificação
+
+- Semana: 01 (02/02 – 06/02)
+- Carga horária estimada: 20h
+- Projeto: Star Wars
+- Orientador(a): 
+- Discente: Isabela Gonçalves
+
+---
+## 2. Objetivos da semana
+
+Objetivo principal:
+- Tratamento e limpeza de dados
+
+Objetivos secundários (se houver):
+- excluir todos, ou máximo possível, de dados faltantes (NA's)
+- 
+
+---
+## 3. Atividades realizadas
+
+Descrever de forma objetiva e técnica as atividades desenvolvidas na semana.
+
+- Leituras realizadas:
+  - [Nenhuma]
+- Implementações / códigos:
+  - banch Main
+- Análises exploratórias / testes:
+  - [Nenhuma]
+- Discussões / reflexões teóricas:
+  - [Nenhuma]
+
+---
+## 4. Resultados parciais / produtos gerados
+
+Listar tudo que foi produzido, mesmo que incompleto.
+
+- Scripts:
+  - Tratamento e limpeza dos dados da variável height
+- Funções:
+  - 
+- Tabelas / gráficos:
+  - [Nenhum(a)]
+- Resumos teóricos:
+  - [Nenhum]
+
+---
+## 5. Problemas e dificuldades encontradas
+
+Descrever claramente os obstáculos enfrentados.
+
+- Teóricos:  
+  - [Nenhum]
+- Computacionais:  
+  - [Nenhum]
+- Dados:  
+  - O dado da altura de um personagem não foi identificado, continuando um valor faltantes (NA's)
+- Metodológicos:  
+  - [Nenhum]
+
+---
+## 6. Decisões tomadas e justificativas
+
+Registrar escolhas feitas ao longo da semana.
+
+- Pesquisar e imputar manualmente os dados encontrados na enciclopédia de Star Wars as alturas dos personagens com dado faltante (NA's na variável height)
+- 
+
+---
+## 7. Próximos passos (planejamento da próxima semana)
+
+Definir tarefas objetivas e alcançáveis.
+
+- 
+- 
+- 
+
+---
+## 8. Referências utilizadas na semana
+
+- WICKHAM, H. et al. Welcome to the tidyverse. Journal of Open Source Software, [S. l.], v. 4, n. 43, p. 1686, 2019. DOI: 10.21105/joss.01686. Disponível em: https://joss.theoj.org/papers/10.21105/joss.01686. Acesso em: 3 fev. 2026.
+- STARWARS (dplyr). Starwars characters. In: dplyr: A grammar of data manipulation. [S. l.], 2023. Disponível em: https://github.com/tidyverse/dplyr. Acesso em: 02 fev. 2026.
+- STAR WARS Fandom. In: Fandom. [S. l.], 2024. Disponível em: https://starwars.fandom.com/wiki/Main_Page. Acesso em: 3 fev. 2026.
+
+---
+## 9. Observações gerais
+
+Espaço livre para comentários, ideias futuras ou pontos para discutir com o(a) orientador(a).
+
+- [Nenhuma]
+
