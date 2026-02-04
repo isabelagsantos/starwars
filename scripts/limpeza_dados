@@ -1,0 +1,94 @@
+```{r}
+#carregando o pacote/coleção de pacote tidyverse
+library(tidyverse)
+```
+
+A seguir, será feito o carregamento dos dados e a análise inicial do comportamento dos dados na base de dados Star Wars:
+```{r}
+#carregando a base de dados Star Wars
+starwars
+
+dados <- starwars
+
+summary(dados)
+dados
+
+
+#verificando se há valores NA's
+cat("As variáveis que possuem dados faltantes são:\n")
+for(i in names(dados)){
+  if(any(is.na(dados[[i]]))){
+    cat("•",i,"\n")
+  }
+}
+```
+Verifica-se logo que as variáveis acima possuem valores faltantes (Na's). Dessa forma, é necessário tratá-las:
+```{r}
+#height
+dados$height
+count(dados[is.na(dados$height),]) #há 6 observações sem a altura (height)
+dados[is.na(dados$height),]
+dados %>%
+  filter(is.na(height)) %>%
+  select(name)
+```
+Após uma conferência no Wookieepedia, enciclopédia criada sobre Star Wars, nota-se que os personagens adiante possuem as respectivas alturas:
+Arvel Crynyd: não encontrado (desconhecido/unknown)
+Finn: 178
+Rey: 170
+Poe Dameron: 172
+BB8: 67
+Captain Phasma: 200
+Dessa forma, será imputado tais valores para conhecidos para eliminar os NA's:
+```{r}
+dados[c(28, 83, 84, 85, 86, 87), c("name","height")]
+dados[c(28, 83, 84, 85, 86, 87), "height"] <- c(NA, 178, 170, 172, 67, 200)
+dados[c(28, 83, 84, 85, 86, 87), c("name","height")]
+```
+
+
+```{r}
+dados$mass
+count(dados[is.na(dados$mass),]) #há 6 observações sem a altura (height)
+dados[is.na(dados$mass),]
+rownames(dados)[is.na(dados$mass)]
+dados %>%
+  filter(is.na(mass)) %>%
+  select(name)
+```
+Dessa forma, os seguintes personagens estão sem valores na variável mass:
+Wilhuff Tarkin				
+Mon Mothma				
+Arvel Crynyd				
+Finis Valorum				
+Rugor Nass				
+Ric Olié				
+Watto				
+Quarsh Panaka				
+Shmi Skywalker				
+Bib Fortuna
+...
+Jocasta Nu				
+R4-P17				
+San Hill				
+Finn				
+Rey				
+Poe Dameron				
+BB8				
+Captain Phasma
+Totalizando 28 personagens sem os dados referentes à variável mass.
+
+Diferentemente da variável height, que possuia 6 dados faltantes, na variável em questão, há 28 observações, o que dificulta a procura de cada personagem e imputação manual. A partir disso, pensei imputar pelo método das tendências centrais, utilizando a mediana, mas diferenciandos por espécies e gênero, quando há.
+
+O ideal seria usar um modelo de regressão para prever os valores, mas, por limitação técnica, não será possível. No entanto, a utilização da mediana não é indevida: tem embasamento e procedência, principalmente com os cuidados em relação aos fatores citados.
+
+Assim, é preciso verificar a espécie e o gênero de cada observação:
+```{r}
+dados %>% 
+  filter(is.na(dados$mass)) %>% 
+  select(name, species, gender) %>% 
+  arrange(desc(species), group_by = T)
+```
+
+Com as espécies disponíveis e o gênero, é necessário encontrar a mediana de suas categorias.
+
