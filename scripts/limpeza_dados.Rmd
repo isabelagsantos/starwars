@@ -1,5 +1,11 @@
+---
+output: html_document
+editor_options: 
+  chunk_output_type: inline
+---
 ```{r}
 #carregando o pacote/coleção de pacote tidyverse
+#install.packages("tidyverse")
 library(tidyverse)
 ```
 
