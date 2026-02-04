@@ -1,4 +1,3 @@
-
 ``` r
 #carregando o pacote/coleção de pacote tidyverse
 #install.packages("tidyverse")
@@ -36,589 +35,107 @@ library(tidyverse)
     ## ✖ dplyr::lag()    masks stats::lag()
     ## ℹ Use the conflicted package (<http://conflicted.r-lib.org/>) to force all conflicts to become errors
 
+``` r
+#install.packages("skimr")
+library(skimr)
+```
+
+    ## Warning: pacote 'skimr' foi compilado no R versão 4.5.2
+
 A seguir, será feito o carregamento dos dados e a análise inicial do
-comportamento dos dados na base de dados Star Wars:
+comportamento dos deles na base de dados Star Wars:
 
 ``` r
 #carregando a base de dados Star Wars
-starwars
+head(starwars)
 ```
 
-    ## # A tibble: 87 × 14
-    ##    name     height  mass hair_color skin_color eye_color birth_year sex   gender
-    ##    <chr>     <int> <dbl> <chr>      <chr>      <chr>          <dbl> <chr> <chr> 
-    ##  1 Luke Sk…    172    77 blond      fair       blue            19   male  mascu…
-    ##  2 C-3PO       167    75 <NA>       gold       yellow         112   none  mascu…
-    ##  3 R2-D2        96    32 <NA>       white, bl… red             33   none  mascu…
-    ##  4 Darth V…    202   136 none       white      yellow          41.9 male  mascu…
-    ##  5 Leia Or…    150    49 brown      light      brown           19   fema… femin…
-    ##  6 Owen La…    178   120 brown, gr… light      blue            52   male  mascu…
-    ##  7 Beru Wh…    165    75 brown      light      blue            47   fema… femin…
-    ##  8 R5-D4        97    32 <NA>       white, red red             NA   none  mascu…
-    ##  9 Biggs D…    183    84 black      light      brown           24   male  mascu…
-    ## 10 Obi-Wan…    182    77 auburn, w… fair       blue-gray       57   male  mascu…
-    ## # ℹ 77 more rows
+    ## # A tibble: 6 × 14
+    ##   name      height  mass hair_color skin_color eye_color birth_year sex   gender
+    ##   <chr>      <int> <dbl> <chr>      <chr>      <chr>          <dbl> <chr> <chr> 
+    ## 1 Luke Sky…    172    77 blond      fair       blue            19   male  mascu…
+    ## 2 C-3PO        167    75 <NA>       gold       yellow         112   none  mascu…
+    ## 3 R2-D2         96    32 <NA>       white, bl… red             33   none  mascu…
+    ## 4 Darth Va…    202   136 none       white      yellow          41.9 male  mascu…
+    ## 5 Leia Org…    150    49 brown      light      brown           19   fema… femin…
+    ## 6 Owen Lars    178   120 brown, gr… light      blue            52   male  mascu…
+    ## # ℹ 5 more variables: homeworld <chr>, species <chr>, films <list>,
+    ## #   vehicles <list>, starships <list>
+
+``` r
+tail(starwars)
+```
+
+    ## # A tibble: 6 × 14
+    ##   name      height  mass hair_color skin_color eye_color birth_year sex   gender
+    ##   <chr>      <int> <dbl> <chr>      <chr>      <chr>          <dbl> <chr> <chr> 
+    ## 1 Tion Med…    206    80 none       grey       black             NA male  mascu…
+    ## 2 Finn          NA    NA black      dark       dark              NA male  mascu…
+    ## 3 Rey           NA    NA brown      light      hazel             NA fema… femin…
+    ## 4 Poe Dame…     NA    NA brown      light      brown             NA male  mascu…
+    ## 5 BB8           NA    NA none       none       black             NA none  mascu…
+    ## 6 Captain …     NA    NA none       none       unknown           NA fema… femin…
     ## # ℹ 5 more variables: homeworld <chr>, species <chr>, films <list>,
     ## #   vehicles <list>, starships <list>
 
 ``` r
 dados <- starwars
-
-summary(dados)
 ```
 
-    ##      name               height           mass          hair_color       
-    ##  Length:87          Min.   : 66.0   Min.   :  15.00   Length:87         
-    ##  Class :character   1st Qu.:167.0   1st Qu.:  55.60   Class :character  
-    ##  Mode  :character   Median :180.0   Median :  79.00   Mode  :character  
-    ##                     Mean   :174.6   Mean   :  97.31                     
-    ##                     3rd Qu.:191.0   3rd Qu.:  84.50                     
-    ##                     Max.   :264.0   Max.   :1358.00                     
-    ##                     NA's   :6       NA's   :28                          
-    ##                                                                         
-    ##                                                                         
-    ##                                                                         
-    ##                                                                         
-    ##                                                                         
-    ##                                                                         
-    ##                                                                         
-    ##                                                                         
-    ##                                                                         
-    ##                                                                         
-    ##                                                                         
-    ##                                                                         
-    ##                                                                         
-    ##                                                                         
-    ##                                                                         
-    ##                                                                         
-    ##                                                                         
-    ##                                                                         
-    ##                                                                         
-    ##                                                                         
-    ##                                                                         
-    ##                                                                         
-    ##                                                                         
-    ##                                                                         
-    ##                                                                         
-    ##                                                                         
-    ##                                                                         
-    ##                                                                         
-    ##                                                                         
-    ##                                                                         
-    ##                                                                         
-    ##                                                                         
-    ##                                                                         
-    ##                                                                         
-    ##                                                                         
-    ##                                                                         
-    ##                                                                         
-    ##                                                                         
-    ##                                                                         
-    ##                                                                         
-    ##                                                                         
-    ##                                                                         
-    ##                                                                         
-    ##                                                                         
-    ##                                                                         
-    ##                                                                         
-    ##                                                                         
-    ##                                                                         
-    ##                                                                         
-    ##                                                                         
-    ##                                                                         
-    ##                                                                         
-    ##                                                                         
-    ##                                                                         
-    ##                                                                         
-    ##                                                                         
-    ##                                                                         
-    ##                                                                         
-    ##                                                                         
-    ##                                                                         
-    ##                                                                         
-    ##                                                                         
-    ##                                                                         
-    ##                                                                         
-    ##                                                                         
-    ##                                                                         
-    ##                                                                         
-    ##                                                                         
-    ##                                                                         
-    ##                                                                         
-    ##                                                                         
-    ##                                                                         
-    ##                                                                         
-    ##                                                                         
-    ##                                                                         
-    ##                                                                         
-    ##                                                                         
-    ##                                                                         
-    ##                                                                         
-    ##                                                                         
-    ##   skin_color         eye_color           birth_year         sex           
-    ##  Length:87          Length:87          Min.   :  8.00   Length:87         
-    ##  Class :character   Class :character   1st Qu.: 35.00   Class :character  
-    ##  Mode  :character   Mode  :character   Median : 52.00   Mode  :character  
-    ##                                        Mean   : 87.57                     
-    ##                                        3rd Qu.: 72.00                     
-    ##                                        Max.   :896.00                     
-    ##                                        NA's   :44                         
-    ##                                                                           
-    ##                                                                           
-    ##                                                                           
-    ##                                                                           
-    ##                                                                           
-    ##                                                                           
-    ##                                                                           
-    ##                                                                           
-    ##                                                                           
-    ##                                                                           
-    ##                                                                           
-    ##                                                                           
-    ##                                                                           
-    ##                                                                           
-    ##                                                                           
-    ##                                                                           
-    ##                                                                           
-    ##                                                                           
-    ##                                                                           
-    ##                                                                           
-    ##                                                                           
-    ##                                                                           
-    ##                                                                           
-    ##                                                                           
-    ##                                                                           
-    ##                                                                           
-    ##                                                                           
-    ##                                                                           
-    ##                                                                           
-    ##                                                                           
-    ##                                                                           
-    ##                                                                           
-    ##                                                                           
-    ##                                                                           
-    ##                                                                           
-    ##                                                                           
-    ##                                                                           
-    ##                                                                           
-    ##                                                                           
-    ##                                                                           
-    ##                                                                           
-    ##                                                                           
-    ##                                                                           
-    ##                                                                           
-    ##                                                                           
-    ##                                                                           
-    ##                                                                           
-    ##                                                                           
-    ##                                                                           
-    ##                                                                           
-    ##                                                                           
-    ##                                                                           
-    ##                                                                           
-    ##                                                                           
-    ##                                                                           
-    ##                                                                           
-    ##                                                                           
-    ##                                                                           
-    ##                                                                           
-    ##                                                                           
-    ##                                                                           
-    ##                                                                           
-    ##                                                                           
-    ##                                                                           
-    ##                                                                           
-    ##                                                                           
-    ##                                                                           
-    ##                                                                           
-    ##                                                                           
-    ##                                                                           
-    ##                                                                           
-    ##                                                                           
-    ##                                                                           
-    ##                                                                           
-    ##                                                                           
-    ##                                                                           
-    ##                                                                           
-    ##                                                                           
-    ##                                                                           
-    ##                                                                           
-    ##     gender           homeworld           species         
-    ##  Length:87          Length:87          Length:87         
-    ##  Class :character   Class :character   Class :character  
-    ##  Mode  :character   Mode  :character   Mode  :character  
-    ##                                                          
-    ##                                                          
-    ##                                                          
-    ##                                                          
-    ##                                                          
-    ##                                                          
-    ##                                                          
-    ##                                                          
-    ##                                                          
-    ##                                                          
-    ##                                                          
-    ##                                                          
-    ##                                                          
-    ##                                                          
-    ##                                                          
-    ##                                                          
-    ##                                                          
-    ##                                                          
-    ##                                                          
-    ##                                                          
-    ##                                                          
-    ##                                                          
-    ##                                                          
-    ##                                                          
-    ##                                                          
-    ##                                                          
-    ##                                                          
-    ##                                                          
-    ##                                                          
-    ##                                                          
-    ##                                                          
-    ##                                                          
-    ##                                                          
-    ##                                                          
-    ##                                                          
-    ##                                                          
-    ##                                                          
-    ##                                                          
-    ##                                                          
-    ##                                                          
-    ##                                                          
-    ##                                                          
-    ##                                                          
-    ##                                                          
-    ##                                                          
-    ##                                                          
-    ##                                                          
-    ##                                                          
-    ##                                                          
-    ##                                                          
-    ##                                                          
-    ##                                                          
-    ##                                                          
-    ##                                                          
-    ##                                                          
-    ##                                                          
-    ##                                                          
-    ##                                                          
-    ##                                                          
-    ##                                                          
-    ##                                                          
-    ##                                                          
-    ##                                                          
-    ##                                                          
-    ##                                                          
-    ##                                                          
-    ##                                                          
-    ##                                                          
-    ##                                                          
-    ##                                                          
-    ##                                                          
-    ##                                                          
-    ##                                                          
-    ##                                                          
-    ##                                                          
-    ##                                                          
-    ##                                                          
-    ##                                                          
-    ##                                                          
-    ##                                                          
-    ##                                                          
-    ##                                                          
-    ##                                                          
-    ##                                                          
-    ##  films.Length  films.Class  films.Mode
-    ##  5          -none-     character      
-    ##  6          -none-     character      
-    ##  7          -none-     character      
-    ##  4          -none-     character      
-    ##  5          -none-     character      
-    ##  3          -none-     character      
-    ##  3          -none-     character      
-    ##  1          -none-     character      
-    ##  1          -none-     character      
-    ##  6          -none-     character      
-    ##  3          -none-     character      
-    ##  2          -none-     character      
-    ##  5          -none-     character      
-    ##  4          -none-     character      
-    ##  1          -none-     character      
-    ##  3          -none-     character      
-    ##  3          -none-     character      
-    ##  1          -none-     character      
-    ##  5          -none-     character      
-    ##  5          -none-     character      
-    ##  3          -none-     character      
-    ##  1          -none-     character      
-    ##  1          -none-     character      
-    ##  2          -none-     character      
-    ##  1          -none-     character      
-    ##  2          -none-     character      
-    ##  1          -none-     character      
-    ##  1          -none-     character      
-    ##  1          -none-     character      
-    ##  1          -none-     character      
-    ##  1          -none-     character      
-    ##  3          -none-     character      
-    ##  1          -none-     character      
-    ##  3          -none-     character      
-    ##  2          -none-     character      
-    ##  1          -none-     character      
-    ##  1          -none-     character      
-    ##  1          -none-     character      
-    ##  2          -none-     character      
-    ##  1          -none-     character      
-    ##  1          -none-     character      
-    ##  2          -none-     character      
-    ##  1          -none-     character      
-    ##  1          -none-     character      
-    ##  3          -none-     character      
-    ##  1          -none-     character      
-    ##  1          -none-     character      
-    ##  1          -none-     character      
-    ##  1          -none-     character      
-    ##  3          -none-     character      
-    ##  3          -none-     character      
-    ##  3          -none-     character      
-    ##  2          -none-     character      
-    ##  2          -none-     character      
-    ##  2          -none-     character      
-    ##  1          -none-     character      
-    ##  3          -none-     character      
-    ##  2          -none-     character      
-    ##  1          -none-     character      
-    ##  1          -none-     character      
-    ##  1          -none-     character      
-    ##  2          -none-     character      
-    ##  2          -none-     character      
-    ##  1          -none-     character      
-    ##  1          -none-     character      
-    ##  2          -none-     character      
-    ##  2          -none-     character      
-    ##  1          -none-     character      
-    ##  1          -none-     character      
-    ##  1          -none-     character      
-    ##  1          -none-     character      
-    ##  1          -none-     character      
-    ##  1          -none-     character      
-    ##  2          -none-     character      
-    ##  1          -none-     character      
-    ##  1          -none-     character      
-    ##  2          -none-     character      
-    ##  1          -none-     character      
-    ##  1          -none-     character      
-    ##  2          -none-     character      
-    ##  2          -none-     character      
-    ##  1          -none-     character      
-    ##  1          -none-     character      
-    ##  1          -none-     character      
-    ##  1          -none-     character      
-    ##  1          -none-     character      
-    ##  1          -none-     character      
-    ##  vehicles.Length  vehicles.Class  vehicles.Mode
-    ##  2          -none-     character               
-    ##  0          -none-     character               
-    ##  0          -none-     character               
-    ##  0          -none-     character               
-    ##  1          -none-     character               
-    ##  0          -none-     character               
-    ##  0          -none-     character               
-    ##  0          -none-     character               
-    ##  0          -none-     character               
-    ##  1          -none-     character               
-    ##  2          -none-     character               
-    ##  0          -none-     character               
-    ##  1          -none-     character               
-    ##  0          -none-     character               
-    ##  0          -none-     character               
-    ##  0          -none-     character               
-    ##  1          -none-     character               
-    ##  0          -none-     character               
-    ##  0          -none-     character               
-    ##  0          -none-     character               
-    ##  0          -none-     character               
-    ##  0          -none-     character               
-    ##  0          -none-     character               
-    ##  0          -none-     character               
-    ##  0          -none-     character               
-    ##  0          -none-     character               
-    ##  0          -none-     character               
-    ##  0          -none-     character               
-    ##  0          -none-     character               
-    ##  0          -none-     character               
-    ##  1          -none-     character               
-    ##  0          -none-     character               
-    ##  0          -none-     character               
-    ##  0          -none-     character               
-    ##  0          -none-     character               
-    ##  0          -none-     character               
-    ##  0          -none-     character               
-    ##  0          -none-     character               
-    ##  0          -none-     character               
-    ##  0          -none-     character               
-    ##  0          -none-     character               
-    ##  0          -none-     character               
-    ##  1          -none-     character               
-    ##  0          -none-     character               
-    ##  0          -none-     character               
-    ##  0          -none-     character               
-    ##  0          -none-     character               
-    ##  0          -none-     character               
-    ##  0          -none-     character               
-    ##  0          -none-     character               
-    ##  0          -none-     character               
-    ##  0          -none-     character               
-    ##  0          -none-     character               
-    ##  0          -none-     character               
-    ##  0          -none-     character               
-    ##  0          -none-     character               
-    ##  0          -none-     character               
-    ##  0          -none-     character               
-    ##  0          -none-     character               
-    ##  0          -none-     character               
-    ##  0          -none-     character               
-    ##  0          -none-     character               
-    ##  0          -none-     character               
-    ##  0          -none-     character               
-    ##  0          -none-     character               
-    ##  1          -none-     character               
-    ##  0          -none-     character               
-    ##  0          -none-     character               
-    ##  1          -none-     character               
-    ##  0          -none-     character               
-    ##  0          -none-     character               
-    ##  0          -none-     character               
-    ##  0          -none-     character               
-    ##  0          -none-     character               
-    ##  0          -none-     character               
-    ##  0          -none-     character               
-    ##  0          -none-     character               
-    ##  1          -none-     character               
-    ##  0          -none-     character               
-    ##  0          -none-     character               
-    ##  0          -none-     character               
-    ##  0          -none-     character               
-    ##  0          -none-     character               
-    ##  0          -none-     character               
-    ##  0          -none-     character               
-    ##  0          -none-     character               
-    ##  0          -none-     character               
-    ##  starships.Length  starships.Class  starships.Mode
-    ##  2          -none-     character                  
-    ##  0          -none-     character                  
-    ##  0          -none-     character                  
-    ##  1          -none-     character                  
-    ##  0          -none-     character                  
-    ##  0          -none-     character                  
-    ##  0          -none-     character                  
-    ##  0          -none-     character                  
-    ##  1          -none-     character                  
-    ##  5          -none-     character                  
-    ##  3          -none-     character                  
-    ##  0          -none-     character                  
-    ##  2          -none-     character                  
-    ##  2          -none-     character                  
-    ##  0          -none-     character                  
-    ##  0          -none-     character                  
-    ##  1          -none-     character                  
-    ##  1          -none-     character                  
-    ##  0          -none-     character                  
-    ##  0          -none-     character                  
-    ##  1          -none-     character                  
-    ##  0          -none-     character                  
-    ##  0          -none-     character                  
-    ##  1          -none-     character                  
-    ##  0          -none-     character                  
-    ##  0          -none-     character                  
-    ##  0          -none-     character                  
-    ##  1          -none-     character                  
-    ##  0          -none-     character                  
-    ##  1          -none-     character                  
-    ##  0          -none-     character                  
-    ##  0          -none-     character                  
-    ##  0          -none-     character                  
-    ##  3          -none-     character                  
-    ##  0          -none-     character                  
-    ##  0          -none-     character                  
-    ##  0          -none-     character                  
-    ##  1          -none-     character                  
-    ##  0          -none-     character                  
-    ##  0          -none-     character                  
-    ##  0          -none-     character                  
-    ##  0          -none-     character                  
-    ##  1          -none-     character                  
-    ##  0          -none-     character                  
-    ##  0          -none-     character                  
-    ##  0          -none-     character                  
-    ##  0          -none-     character                  
-    ##  0          -none-     character                  
-    ##  0          -none-     character                  
-    ##  0          -none-     character                  
-    ##  0          -none-     character                  
-    ##  0          -none-     character                  
-    ##  0          -none-     character                  
-    ##  0          -none-     character                  
-    ##  0          -none-     character                  
-    ##  0          -none-     character                  
-    ##  1          -none-     character                  
-    ##  0          -none-     character                  
-    ##  1          -none-     character                  
-    ##  0          -none-     character                  
-    ##  0          -none-     character                  
-    ##  0          -none-     character                  
-    ##  0          -none-     character                  
-    ##  0          -none-     character                  
-    ##  0          -none-     character                  
-    ##  0          -none-     character                  
-    ##  0          -none-     character                  
-    ##  0          -none-     character                  
-    ##  0          -none-     character                  
-    ##  0          -none-     character                  
-    ##  0          -none-     character                  
-    ##  0          -none-     character                  
-    ##  0          -none-     character                  
-    ##  0          -none-     character                  
-    ##  0          -none-     character                  
-    ##  0          -none-     character                  
-    ##  0          -none-     character                  
-    ##  1          -none-     character                  
-    ##  0          -none-     character                  
-    ##  0          -none-     character                  
-    ##  0          -none-     character                  
-    ##  0          -none-     character                  
-    ##  0          -none-     character                  
-    ##  0          -none-     character                  
-    ##  1          -none-     character                  
-    ##  0          -none-     character                  
-    ##  0          -none-     character
-
-``` r
-dados
-```
-
-    ## # A tibble: 87 × 14
-    ##    name     height  mass hair_color skin_color eye_color birth_year sex   gender
-    ##    <chr>     <int> <dbl> <chr>      <chr>      <chr>          <dbl> <chr> <chr> 
-    ##  1 Luke Sk…    172    77 blond      fair       blue            19   male  mascu…
-    ##  2 C-3PO       167    75 <NA>       gold       yellow         112   none  mascu…
-    ##  3 R2-D2        96    32 <NA>       white, bl… red             33   none  mascu…
-    ##  4 Darth V…    202   136 none       white      yellow          41.9 male  mascu…
-    ##  5 Leia Or…    150    49 brown      light      brown           19   fema… femin…
-    ##  6 Owen La…    178   120 brown, gr… light      blue            52   male  mascu…
-    ##  7 Beru Wh…    165    75 brown      light      blue            47   fema… femin…
-    ##  8 R5-D4        97    32 <NA>       white, red red             NA   none  mascu…
-    ##  9 Biggs D…    183    84 black      light      brown           24   male  mascu…
-    ## 10 Obi-Wan…    182    77 auburn, w… fair       blue-gray       57   male  mascu…
-    ## # ℹ 77 more rows
-    ## # ℹ 5 more variables: homeworld <chr>, species <chr>, films <list>,
-    ## #   vehicles <list>, starships <list>
+Com uma visão global, será visualizado se há dados faltantes (NA’s) e em
+quais variáveis
 
 ``` r
 #verificando se há valores NA's
+skim(dados)
+```
+
+|                                                  |       |
+|:-------------------------------------------------|:------|
+| Name                                             | dados |
+| Number of rows                                   | 87    |
+| Number of columns                                | 14    |
+| \_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_   |       |
+| Column type frequency:                           |       |
+| character                                        | 8     |
+| list                                             | 3     |
+| numeric                                          | 3     |
+| \_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_ |       |
+| Group variables                                  | None  |
+
+Data summary
+
+**Variable type: character**
+
+| skim_variable | n_missing | complete_rate | min | max | empty | n_unique | whitespace |
+|:--------------|----------:|--------------:|----:|----:|------:|---------:|-----------:|
+| name          |         0 |          1.00 |   3 |  21 |     0 |       87 |          0 |
+| hair_color    |         5 |          0.94 |   4 |  13 |     0 |       11 |          0 |
+| skin_color    |         0 |          1.00 |   3 |  19 |     0 |       31 |          0 |
+| eye_color     |         0 |          1.00 |   3 |  13 |     0 |       15 |          0 |
+| sex           |         4 |          0.95 |   4 |  14 |     0 |        4 |          0 |
+| gender        |         4 |          0.95 |   8 |   9 |     0 |        2 |          0 |
+| homeworld     |        10 |          0.89 |   4 |  14 |     0 |       48 |          0 |
+| species       |         4 |          0.95 |   3 |  14 |     0 |       37 |          0 |
+
+**Variable type: list**
+
+| skim_variable | n_missing | complete_rate | n_unique | min_length | max_length |
+|:--------------|----------:|--------------:|---------:|-----------:|-----------:|
+| films         |         0 |             1 |       24 |          1 |          7 |
+| vehicles      |         0 |             1 |       11 |          0 |          2 |
+| starships     |         0 |             1 |       16 |          0 |          5 |
+
+**Variable type: numeric**
+
+| skim_variable | n_missing | complete_rate |   mean |     sd |  p0 |   p25 | p50 |   p75 | p100 | hist  |
+|:--------------|----------:|--------------:|-------:|-------:|----:|------:|----:|------:|-----:|:------|
+| height        |         6 |          0.93 | 174.60 |  34.77 |  66 | 167.0 | 180 | 191.0 |  264 | ▂▁▇▅▁ |
+| mass          |        28 |          0.68 |  97.31 | 169.46 |  15 |  55.6 |  79 |  84.5 | 1358 | ▇▁▁▁▁ |
+| birth_year    |        44 |          0.49 |  87.57 | 154.69 |   8 |  35.0 |  52 |  72.0 |  896 | ▇▁▁▁▁ |
+
+``` r
+#verificando em quais variáveis há valores NA's
 cat("As variáveis que possuem dados faltantes são:\n")
 ```
 
@@ -646,14 +163,16 @@ Verifica-se logo que as variáveis acima possuem valores faltantes
 
 ``` r
 #height
-dados$height
+head(dados$height)
 ```
 
-    ##  [1] 172 167  96 202 150 178 165  97 183 182 188 180 228 180 173 175 170 180  66
-    ## [20] 170 183 200 190 177 175 180 150  NA  88 160 193 191 170 185 196 224 206 183
-    ## [39] 137 112 183 163 175 180 178  79  94 122 163 188 198 196 171 184 188 264 188
-    ## [58] 196 185 157 183 183 170 166 165 193 191 183 168 198 229 213 167  96 193 191
-    ## [77] 178 216 234 188 178 206  NA  NA  NA  NA  NA
+    ## [1] 172 167  96 202 150 178
+
+``` r
+tail(dados$height)
+```
+
+    ## [1] 206  NA  NA  NA  NA  NA
 
 ``` r
 count(dados[is.na(dados$height),]) #há 6 observações sem a altura (height)
@@ -698,9 +217,12 @@ dados %>%
 
 Após uma conferência no Wookieepedia, enciclopédia criada sobre Star
 Wars, nota-se que os personagens adiante possuem as respectivas alturas:
+
 Arvel Crynyd: não encontrado (desconhecido/unknown) Finn: 178 Rey: 170
-Poe Dameron: 172 BB8: 67 Captain Phasma: 200 Dessa forma, será imputado
-tais valores para conhecidos para eliminar os NA’s:
+Poe Dameron: 172 BB8: 67 Captain Phasma: 200
+
+Dessa forma, será imputado tais valores para conhecidos para eliminar os
+NA’s:
 
 ``` r
 dados[c(28, 83, 84, 85, 86, 87), c("name","height")]
@@ -732,21 +254,20 @@ dados[c(28, 83, 84, 85, 86, 87), c("name","height")]
     ## 6 Captain Phasma    200
 
 ``` r
-dados$mass
+#mass
+head(dados$mass)
 ```
 
-    ##  [1]   77.0   75.0   32.0  136.0   49.0  120.0   75.0   32.0   84.0   77.0
-    ## [11]   84.0     NA  112.0   80.0   74.0 1358.0   77.0  110.0   17.0   75.0
-    ## [21]   78.2  140.0  113.0   79.0   79.0   83.0     NA     NA   20.0   68.0
-    ## [31]   89.0   90.0     NA   45.0   66.0   82.0     NA     NA     NA   40.0
-    ## [41]     NA     NA   80.0     NA   55.0   15.0   45.0     NA   65.0   84.0
-    ## [51]   82.0   87.0     NA   50.0     NA     NA   80.0     NA   85.0     NA
-    ## [61]     NA   80.0   56.2   50.0     NA   80.0     NA   79.0   55.0  102.0
-    ## [71]   88.0     NA     NA     NA   48.0     NA   57.0  159.0  136.0   79.0
-    ## [81]   48.0   80.0     NA     NA     NA     NA     NA
+    ## [1]  77  75  32 136  49 120
 
 ``` r
-count(dados[is.na(dados$mass),]) #há 6 observações sem a altura (height)
+tail(dados$mass)
+```
+
+    ## [1] 80 NA NA NA NA NA
+
+``` r
+count(dados[is.na(dados$mass),])
 ```
 
     ## # A tibble: 1 × 1
@@ -804,7 +325,9 @@ dados %>%
     ## # ℹ 18 more rows
 
 Dessa forma, os seguintes personagens estão sem valores na variável
-mass: Wilhuff Tarkin  
+mass:
+
+Wilhuff Tarkin  
 Mon Mothma  
 Arvel Crynyd  
 Finis Valorum  
@@ -813,15 +336,20 @@ Ric Olié
 Watto  
 Quarsh Panaka  
 Shmi Skywalker  
-Bib Fortuna … Jocasta Nu  
+Bib Fortuna
+
+…
+
+Jocasta Nu  
 R4-P17  
 San Hill  
 Finn  
 Rey  
 Poe Dameron  
 BB8  
-Captain Phasma Totalizando 28 personagens sem os dados referentes à
-variável mass.
+Captain Phasma
+
+Totalizando 28 personagens sem os dados referentes à variável mass.
 
 Diferentemente da variável height, que possuia 6 dados faltantes, na
 variável em questão, há 28 observações, o que dificulta a procura de
