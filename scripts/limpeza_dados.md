@@ -386,9 +386,6 @@ dados %>%
     ## 10 Mon Mothma     Human     feminine 
     ## # ℹ 18 more rows
 
-Com as espécies disponíveis e o gênero, é necessário encontrar a mediana
-de suas categorias.
-
 ``` r
 species_mass_na <- dados %>% 
   group_by(species) %>% 
