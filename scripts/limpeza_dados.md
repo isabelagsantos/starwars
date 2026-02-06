@@ -366,7 +366,7 @@ Assim, é preciso verificar a espécie e o gênero de cada observação:
 
 ``` r
 dados %>% 
-  filter(is.na(dados$mass)) %>% 
+  filter(is.na(mass)) %>% 
   select(name, species, gender) %>% 
   arrange(desc(species), group_by = T)
 ```
@@ -388,3 +388,81 @@ dados %>%
 
 Com as espécies disponíveis e o gênero, é necessário encontrar a mediana
 de suas categorias.
+
+``` r
+species_mass_na <- dados %>% 
+  group_by(species) %>% 
+  summarise(
+    n_personagem = n(),
+    n_na_mass = sum(is.na(mass)),
+    n_masculine = sum(gender=="masculine", na.rm = TRUE),
+    n_feminine = sum(gender=="feminine", na.rm = TRUE),
+    n_masculine_na_mass = sum(is.na(mass) & gender=="masculine"),
+    n_feminine_na_mass = sum(is.na(mass) & gender=="feminine"),
+    prop_na_mass = round((n_na_mass / n_personagem)*100, 2),
+    prop_na_masculine = round((n_masculine_na_mass / n_masculine)*100, 2),
+    prop_na_feminine = round((n_feminine_na_mass / n_feminine)*100, 2)
+  ) %>% 
+  filter(n_na_mass>0)
+
+species_mass_na
+```
+
+    ## # A tibble: 13 × 10
+    ##    species   n_personagem n_na_mass n_masculine n_feminine n_masculine_na_mass
+    ##    <chr>            <int>     <int>       <int>      <int>               <int>
+    ##  1 Chagrian             1         1           1          0                   1
+    ##  2 Droid                6         2           5          1                   1
+    ##  3 Gungan               3         1           3          0                   1
+    ##  4 Human               35        15          26          9                   9
+    ##  5 Iktotchi             1         1           1          0                   1
+    ##  6 Kaminoan             2         1           1          1                   0
+    ##  7 Muun                 1         1           1          0                   1
+    ##  8 Quermian             1         1           1          0                   1
+    ##  9 Toydarian            1         1           1          0                   1
+    ## 10 Twi'lek              2         1           1          1                   1
+    ## 11 Xexto                1         1           1          0                   1
+    ## 12 Zabrak               2         1           2          0                   1
+    ## 13 <NA>                 4         1           0          0                  NA
+    ## # ℹ 4 more variables: n_feminine_na_mass <int>, prop_na_mass <dbl>,
+    ## #   prop_na_masculine <dbl>, prop_na_feminine <dbl>
+
+``` r
+sum(species_mass_na$n_na_mass)
+```
+
+    ## [1] 28
+
+Com essa tabela, é possível observar alguns pontos: 1. há personagens
+com NA na massa, mas é o único da base de dados (ex.: Mas Amedda); 2. há
+personagens de determinada espécie e gênero com NA na massa, mas é o
+único da base de dados (ex.: Yarael Poof e R4-P17);
+
+Assim, é necessário fazer o filtro inicial para eliminar aqueles que do
+ponto 1 (n_personagem = n_na_mass) e 2 (n_masculine =
+n_masculine_na_mass e n_feminine = n_feminine_na_mass). Para isso, é
+preciso retirar aqueles com proporção de personagens com NA na massa
+igual a 100% (prop_na_mass = 100) e aqueles que a proporção de NA em um
+gênero específico seja igual a 100% (prop_na_masculine = 100 e
+prop_na_feminine = 100):
+
+``` r
+imput_na_mass <- species_mass_na %>% 
+  filter(prop_na_mass < 100, prop_na_masculine < 100, prop_na_feminine < 100)
+
+imput_na_mass
+```
+
+    ## # A tibble: 1 × 10
+    ##   species n_personagem n_na_mass n_masculine n_feminine n_masculine_na_mass
+    ##   <chr>          <int>     <int>       <int>      <int>               <int>
+    ## 1 Human             35        15          26          9                   9
+    ## # ℹ 4 more variables: n_feminine_na_mass <int>, prop_na_mass <dbl>,
+    ## #   prop_na_masculine <dbl>, prop_na_feminine <dbl>
+
+Sendo assim, os únicos que são elegíveis a receber esse tipo de
+imputação são os da espécie (specie) humana (Human).
+
+Logo, é preciso estudar os humanas que possuem NA na massa em relação ao
+gênero e as quantidades, tanto de cada gênero em relação ao total quanto
+de cada gênero em relação aos número de NA na massa.
