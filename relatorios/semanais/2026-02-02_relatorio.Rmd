@@ -37,6 +37,14 @@ Descrição objetiva e técnica das atividades desenvolvidas na semana.
   - Avaliação de possíveis estratégias para tratamento de dados faltantes
   - Identificação e catalogação das observações com valores faltantes na variável mass
   - Planejamento da imputação baseada em mediana estratificada por espécie e gênero para a variável mass
+  - Construção de tabela resumo agrupando personagens por espécie e gênero, contendo:
+  - Número total de personagens por espécie
+  - Quantidade absoluta e proporção de valores faltantes na variável mass
+  - Quantidade de observações faltantes estratificadas por gênero dentro de cada espécie
+  - Avaliação da viabilidade estatística da imputação com base na estrutura dos grupos
+  - Aplicação de filtros metodológicos para exclusão de espécies ou grupos com 100% de valores ausentes
+  - Identificação de que apenas personagens da espécie humana apresentam estrutura adequada para futura imputação baseada em estatísticas do grupo
+
 
 ---
 ## 4. Resultados parciais / produtos gerados
@@ -49,6 +57,9 @@ Listagem de tudo que foi produzido, mesmo que incompleto.
 - Produtos gerados:
   - Preparação da base para etapas subsequentes de análise exploratória
   - Estrutura inicial da fase de limpeza de dados
+  - Tabela auxiliar para avaliação da distribuição e proporção de dados faltantes da variável mass por espécie e gênero
+  - Definição de critérios metodológicos para seleção de grupos elegíveis para imputação estatística
+
 
 ---
 ## 5. Problemas e dificuldades encontradas
@@ -68,6 +79,8 @@ Registro das escolhas feitas ao longo da semana.
 
 - Pesquisar e imputar manualmente os dados encontrados na enciclopédia de Star Wars as alturas dos personagens com dado faltante (NA's na variável height), com registro da fonte para garantir rastreabilidade dos dados inseridos.
 - Para os dados faltantes da variável mass, optou-se pela imputação por medidas de tendência central, especificamente a mediana, estratificada por espécie e gênero quando disponível. A escolha foi motivada pelo elevado número de valores ausentes, que inviabiliza a busca manual individual. Embora modelos de regressão pudessem ser empregados para predição dos valores, essa abordagem não foi adotada devido a limitações técnicas e ao escopo atual do projeto. A utilização da mediana possui embasamento estatístico, sendo uma medida robusta frente a valores extremos e adequada para dados potencialmente assimétricos
+- Adicionalmente, foi realizada análise exploratória para verificar a viabilidade da imputação dentro dos estratos formados por espécie e gênero, excluindo grupos com ausência total de dados observados, a fim de evitar vieses estatísticos e garantir maior robustez na imputação.
+
 ---
 ## 7. Próximos passos (planejamento da próxima semana)
 
@@ -77,6 +90,8 @@ Desenho de tarefas.
 - Iniciar análise exploratória descritiva da base
 - Construir visualizações estatísticas iniciais
 - Avaliar consistência e padronização das variáveis categóricas
+- Implementar procedimento de imputação da variável mass para personagens humanos com base na mediana estratificada por gênero
+
 
 ---
 ## 8. Referências utilizadas na semana
