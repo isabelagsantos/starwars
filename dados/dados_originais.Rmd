@@ -1,0 +1,7 @@
+Dados originais
+```{r}
+#library(tidyverse)
+dados_originais <- starwars
+write_csv(dados_originais, "dados_originais.csv")
+```
+
